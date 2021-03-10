@@ -24,7 +24,7 @@ Input:
 X: explanatory matrix, numpy matrix in C-contiguous order (last-index varies the fastest).  
 Y: response variable, numpy matrix in C-contiguous order (last-index varies the fastest).  
 
-The row dimension of X and Y should be the same. Y input allows multiple columns, with each column as one input response variable. The function will return the same number of output in output matrices.
+The row dimension of X and Y should be the same. Y input allows multiple columns, with each column as one input response variable. The function will return the same number of output variables in output matrices (beta, se, zscore, pvalue).
 
 alpha: penalty factor in ridge regression (>= 0). If alpha is 0, we will use regular ordinary least square.  
 alternative: one-tailed or two-tailed statistical test, with three options: 1, two-sided; 2, greater; 3, less.  
