@@ -11,10 +11,10 @@ For simplicity, you may install anaconda (https://www.anaconda.com) to include a
 4, gsl-2.6: https://ftp.gnu.org/gnu/gsl  
 
 Install:  
-python setup.py install. 
+python setup.py install  
 
 Test:  
-python -m unittest tests.regression. 
+python -m unittest tests.regression  
 
 Usage:  
 Call the regression function in python code as follows:  
