@@ -1,6 +1,6 @@
 Release
 build
 git_*
-.project
-.pydevproject
+.*project
+.settings
 *~
