@@ -21,12 +21,16 @@ fpath = pathlib.Path(__file__).parent.absolute()
 output = os.path.join(fpath, 'data', 'output')
 
 def dataframe_to_array(x):
+    """ convert data frame to numpy matrix in C order, in case numpy and gsl use different matrix order """
+    
     x = x.to_numpy()
     if x.flags.f_contiguous: x = numpy.array(x, order='C')
     return x
 
 
 def difference(x, y, max_mode=True):
+    """ difference between two numpy matrix """
+    
     diff = numpy.abs(x-y)
     
     if max_mode:
@@ -37,6 +41,8 @@ def difference(x, y, max_mode=True):
 
 
 def save_results(beta, se, zscore, pvalue, out):
+    """ a tool function in development, save results """
+    
     for title, mat in [
         ['beta', beta],
         ['se', se],
@@ -47,6 +53,8 @@ def save_results(beta, se, zscore, pvalue, out):
 
 
 def load_results(out):
+    """ load pre-computed results for comparison """
+    
     result = []
     
     for title in ['beta', 'se', 'zscore', 'pvalue']:
@@ -58,23 +66,28 @@ def load_results(out):
 class TestRegressionMethods(unittest.TestCase):
     
     def test_bulk(self):
+        # an example differential logFC vector from cell lines infected with different viruses
         Y = os.path.join(fpath, 'data', 'infection_GSE147507.gz')
         Y = pandas.read_csv(Y, sep='\t', index_col=0)
         
+        # a sub matrix of CellSig prediction model
         X = os.path.join(fpath, 'data', 'signaling_signature.gz')
         X = pandas.read_csv(X, sep='\t', index_col=0)
         
         common = Y.index.intersection(X.index)
         Y, X = Y.loc[common], X.loc[common]
         
+        # correct background differential change, but please don't do this if you normalized all gene values by zero-mean
         X['background'] = Y.mean(axis=1)
         
+        # adjust variables in a reasonable range
         Y = (Y - Y.mean())/Y.std()
         X = (X - X.mean())/X.std()
     
         Y = dataframe_to_array(Y)
         X = dataframe_to_array(X)
         
+        # Test A: permutation test
         start_time = time.time()
         beta_p, se_p, zscore_p, pvalue_p = ridge_significance.fit(X, Y, alpha, alternative, nrand, 1)
         print("permutation test %s seconds" % (time.time() - start_time))
@@ -89,7 +102,7 @@ class TestRegressionMethods(unittest.TestCase):
         self.assertTrue(difference(zscore_p, zscore, False) < 1)
         self.assertTrue(difference(pvalue_p, pvalue, False) < 1e-2)
         
-        # Test just OLS student t-test
+        # Test B: student t-test
         start_time = time.time()
         beta_t, se_t, zscore_t, pvalue_t = ridge_significance.fit(X, Y, alpha, alternative, 0, 1)
         print("t test %s seconds" % (time.time() - start_time))
