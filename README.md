@@ -29,8 +29,7 @@ nrand: number of randomizations (>=0). If nrand = 0, we will use student t-test 
 verbose: 1 or 0. Report intermediate results.  
 
 Output:  
-beta: regression coefficient. 
-se: standard error. 
-zscore: beta/se. 
-pvalue: statistical significance from permutation test (nrand>0) or student t-test (nrand=0). 
-Prerequisite:
+beta: regression coefficient.  
+se: standard error.  
+zscore: beta/se.  
+pvalue: statistical significance from permutation test (nrand>0) or student t-test (nrand=0).  
