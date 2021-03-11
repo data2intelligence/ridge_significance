@@ -3,6 +3,6 @@ build
 git_*
 .*project
 .settings
-#__pycache__
-#*.pyc
+__pycache__
+*.pyc
 *~
