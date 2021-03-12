@@ -7,7 +7,6 @@ import pathlib
 import random
 
 import ridge_significance
-import statsmodels.api as sm
 
 random.seed(0)
 

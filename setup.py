@@ -10,6 +10,6 @@ setup(name = 'ridge_significance',
       include_dirs = [os.path.join(numpy.get_include(), 'numpy')],
       
       install_requires=[
-        'numpy',
+        'numpy', 'pandas'
         ],
       )
