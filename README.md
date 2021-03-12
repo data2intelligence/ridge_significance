@@ -5,9 +5,8 @@ Prerequisite:
 1, python >= 3.6 developer version. We suggest install anaconda (https://www.anaconda.com) to include all required packages.  
 2, numpy >= 1.19;  
 3, pandas >= 1.1.4;  
-
-3, gcc >= 4.2;  
-4, gsl-2.6: https://ftp.gnu.org/gnu/gsl  
+4, gcc >= 4.2;  
+5, gsl-2.6: https://ftp.gnu.org/gnu/gsl  
 
 Install:  
 python setup.py install  
