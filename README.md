@@ -4,6 +4,8 @@ Ridge regression with a fast implementation of statistical significance test.
 Prerequisite:  
 1, python >= 3.6 developer version;  
 2, numpy >= 1.19;  
+3, pandas >= 1.1.4;  
+4, statsmodel >= 0.12.0;  
 
 For simplicity, you may install anaconda (https://www.anaconda.com) to include all required python packages.
 
