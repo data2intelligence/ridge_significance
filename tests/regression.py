@@ -19,13 +19,12 @@ fpath = pathlib.Path(__file__).parent.absolute()
 
 output = os.path.join(fpath, 'data', 'output')
 
-def dataframe_to_array(x):
+def dataframe_to_array(x, dtype = None):
     """ convert data frame to numpy matrix in C order, in case numpy and gsl use different matrix order """
     
-    x = x.to_numpy()
+    x = x.to_numpy(dtype=dtype)
     if x.flags.f_contiguous: x = numpy.array(x, order='C')
     return x
-
 
 def difference(x, y, max_mode=True):
     """ difference between two numpy matrix """
