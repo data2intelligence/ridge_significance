@@ -26,6 +26,7 @@ def dataframe_to_array(x, dtype = None):
     if x.flags.f_contiguous: x = numpy.array(x, order='C')
     return x
 
+
 def difference(x, y, max_mode=True):
     """ difference between two numpy matrix """
     

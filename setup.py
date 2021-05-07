@@ -1,4 +1,4 @@
-from setuptools import setup, Extension, find_packages
+from setuptools import setup, Extension
 import os, numpy
 
 with open("README.md", "r") as fh:
@@ -18,8 +18,9 @@ setup(
     
     url="https://github.com/data2intelligence/ridge_significance",
     
-    ext_modules = [module],
     include_dirs = [os.path.join(numpy.get_include(), 'numpy')],
     
     install_requires=['numpy', 'pandas'],
+    
+    ext_modules = [module],
     )
