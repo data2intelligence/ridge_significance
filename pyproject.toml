@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ridge_significance"
+description = "Ridge regression with a fast implementation of statistical significance test."
+readme = "README.md"
+requires-python = ">=3.6"
+keywords = []
+license = {text = "NCI software use license"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "numpy",
+    "pandas",
+]
