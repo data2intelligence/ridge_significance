@@ -8,3 +8,4 @@ git_*
 __pycache__
 *.pyc
 *~
+/Debug/
