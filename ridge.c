@@ -1,3 +1,4 @@
+#include <math.h>
 #include <assert.h>
 #include <stdlib.h>
 #include <gsl/gsl_blas.h>
@@ -276,9 +277,10 @@ int t_test(
 			se = sigma2[j] * t;
 
 			if(se < EPS){
-				if(verbose) fprintf(stderr, "Error: standard error %e smaller than %e\n", se, EPS);
+				if(verbose) fprintf(stderr, "Error: standard error %e smaller than %e on %lu, %lu\n", se, EPS, i, j);
 
-				return ERROR_VARIANCE;
+				//return ERROR_VARIANCE;
+				se = NAN;
 			}else{
 				se = sqrt(se);
 			}
@@ -298,19 +300,22 @@ int t_test(
 		{
 			t = gsl_matrix_get(zscore, i, j);
 
-			switch (mode) {
-				case TWOSIDED:
-					t = 2*gsl_cdf_tdist_Q(fabs(t), df);
-					break;
-				case GREATER:
-					t = gsl_cdf_tdist_Q(t, df);
-					break;
-				case LESS:
-					t = gsl_cdf_tdist_P(t, df);
-					break;
-				default:
-					return ERROR_UNRECOGNIZED_MODE;
-					break;
+			if(!isnan(t))
+			{
+				switch (mode) {
+					case TWOSIDED:
+						t = 2*gsl_cdf_tdist_Q(fabs(t), df);
+						break;
+					case GREATER:
+						t = gsl_cdf_tdist_Q(t, df);
+						break;
+					case LESS:
+						t = gsl_cdf_tdist_P(t, df);
+						break;
+					default:
+						return ERROR_UNRECOGNIZED_MODE;
+						break;
+				}
 			}
 
 			gsl_matrix_set(pvalue, i, j, t);

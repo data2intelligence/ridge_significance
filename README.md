@@ -6,7 +6,7 @@ Prerequisite:
 2, numpy >= 1.19;  
 3, pandas >= 1.1.4;  
 4, gcc >= 4.2;  
-5, gsl-2.6: https://ftp.gnu.org/gnu/gsl  
+5, gsl-2.6: https://ftp.gnu.org/gnu/gsl (please don't use other versions, such as 2.7)  
 
 Install:  
 python setup.py install  
